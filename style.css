@@ -82,3 +82,17 @@ footer {
     font-size: 14px;
     opacity: 0.7;
 }
+.scholar-link a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.scholar-link a:hover {
+    text-decoration: underline;
+}
+
+.scholar-icon {
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
