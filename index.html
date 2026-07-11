@@ -62,9 +62,17 @@ PolyU Profile
 
 </div>
 
-<footer>
-    Visitor Count: <span id="counter">Loading...</span>
-</footer>
+<div id="visitor-count" style="margin-top:40px; font-size:14px; opacity:0.7;">
+    Visitors: <span id="gc-visits">Loading...</span>
+</div>
+
+<script>
+fetch("https://leong.goatcounter.com/TOTAL.json")
+  .then(res => res.json())
+  .then(data => {
+      document.getElementById("gc-visits").innerText = data.count;
+  });
+</script>
 
 <script>
 function toggleMode() {
