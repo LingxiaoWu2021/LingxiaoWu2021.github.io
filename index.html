@@ -1,62 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dr. Lingxiao Wu</title>
-<style>
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    max-width: 900px;
-    margin: auto;
-    padding: 40px 20px;
-    line-height: 1.7;
-    color: #333;
-}
-h1 {
-    font-size: 32px;
-    margin-bottom: 5px;
-}
-h2 {
-    margin-top: 40px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-}
-.section {
-    margin-top: 25px;
-}
-a {
-    color: #0056b3;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-.highlight {
-    font-weight: bold;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="light">
 
-<h1>Dr. Lingxiao Wu (Leo)</h1>
+<header>
+    <div><strong>Dr. Lingxiao Wu</strong></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="publications.html">Publications</a>
+        <button onclick="toggleMode()">🌙</button>
+    </nav>
+</header>
 
-<p class="highlight">
-Assistant Professor<br>
-Department of Aeronautical and Aviation Engineering<br>
-The Hong Kong Polytechnic University<br>
-Hung Hom, Kowloon, Hong Kong<br>
-Email: <a href="mailto:lingxiao-leo.wu@polyu.edu.hk">lingxiao-leo.wu@polyu.edu.hk</a>
-</p>
+<div class="container">
+
+<div class="profile">
+    <img src="https://i.imgur.com/placeholder.jpg" alt="Profile Photo">
+    <div>
+        <h1>Assistant Professor</h1>
+        Department of Aeronautical and Aviation Engineering<br>
+        The Hong Kong Polytechnic University<br>
+        Hung Hom, Kowloon, Hong Kong<br><br>
+        Email: <a href="mailto:lingxiao-leo.wu@polyu.edu.hk">
+        lingxiao-leo.wu@polyu.edu.hk</a>
+    </div>
+</div>
 
 <h2>Biography</h2>
+
 <p>
-Dr. Lingxiao Wu (Leo) is an Assistant Professor at the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University. Prior to this, he was a Postdoctoral Research Fellow at HEC Montreal, Canada. He received his PhD degree in Transportation Studies from The Hong Kong Polytechnic University in 2020, supported by the Hong Kong PhD Fellowship Scheme. He obtained his MSc degree in Management Science from Tongji University, China and his BSc degree in Logistics Management from Dalian Maritime University, China.
+Dr. Lingxiao Wu (Leo) is an Assistant Professor at the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University. Prior to this, he was a Postdoctoral Research Fellow at HEC Montreal, Canada.
 </p>
 
 <p>
-His research expertise focuses on integrating operations research and data analytics to solve complex logistics and transportation problems, particularly in aviation and maritime systems. His work has appeared in leading journals including <em>Operations Research</em>, <em>Transportation Research Part A/B/C/D/E</em>, and <em>Transportation Science</em>.
+His research integrates operations research and data analytics to solve complex logistics and transportation problems in aviation and maritime systems.
 </p>
 
 <p>
@@ -66,42 +49,35 @@ PolyU Profile
 </a>
 </p>
 
-<h2>Research</h2>
+<h2>Research Interests</h2>
+
 <ul>
 <li>Data-driven Optimization</li>
-<li>Aviation Operations Modelling and Optimization</li>
+<li>Aviation Operations Modelling</li>
 <li>UAV Service Network Design</li>
-<li>Shipping and Port Operations Modelling and Optimization</li>
-<li>Robust and Stochastic Optimization</li>
-<li>Large-scale Decomposition Algorithms</li>
+<li>Shipping and Port Operations</li>
+<li>Robust & Stochastic Optimization</li>
 </ul>
 
-<h2>Selected Publications</h2>
-<ul>
-<li>Wu, L., Adulyasak, Y., Cordeau, J.-F., Wang, S. (2022). Vessel service planning in seaports. <em>Operations Research</em>.</li>
-<li>Wu, L., Wang, S., Laporte, G. (2021). Robust bulk ship routing problem. <em>Transportation Research Part B</em>.</li>
-<li>Jia, S., Wu, L., Meng, Q. (2020). Vessel traffic scheduling. <em>Transportation Science</em>.</li>
-<li>Wu, L., Wang, S. (2020). Shore power deployment. <em>Transportation Research Part E</em>.</li>
-</ul>
+</div>
 
-<h2>Students</h2>
-<p>
-Self-motivated students with strong backgrounds in engineering, mathematics, computer science, or business analytics are encouraged to contact me for PhD opportunities.
-</p>
+<footer>
+    Visitor Count: <span id="counter">Loading...</span>
+</footer>
 
-<p>
-Interested candidates should send:
-</p>
-<ul>
-<li>CV</li>
-<li>Transcripts</li>
-<li>Research Statement</li>
-<li>Representative Publications (if any)</li>
-</ul>
+<script>
+function toggleMode() {
+    document.body.classList.toggle("dark");
+    document.body.classList.toggle("light");
+}
 
-<p>
-Contact: <a href="mailto:lingxiao-leo.wu@polyu.edu.hk">lingxiao-leo.wu@polyu.edu.hk</a>
-</p>
+/* Visitor Counter */
+fetch('https://api.countapi.xyz/hit/lingxiao-wu-academic/homepage')
+.then(res => res.json())
+.then(res => {
+    document.getElementById('counter').innerText = res.value;
+});
+</script>
 
 </body>
 </html>
