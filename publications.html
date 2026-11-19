@@ -438,7 +438,7 @@
    DATA — edit this section to add or change publications.
 
    Each entry:
-     y    year (number), omit for working papers
+     y    year (number)
      a    authors, exactly as you want them shown. Markers after a name:
             #  student supervised by Dr. Wu
             &  postdoctoral fellow working with Dr. Wu
@@ -447,8 +447,8 @@
      v    venue key from VENUES below (omit if none)
      vt   venue text to show instead of the VENUES full name (optional)
      d    volume, issue, pages or article number (optional)
-     st   status, e.g. "To appear", "In press", "Under revision at ..." (optional)
-     type journal | conference | wp
+     st   status, e.g. "To appear", "In press", "Online" (optional)
+     type journal | conference
      app  application tags (keys of APPS)
      dm   methodological domain(s): "or", "ml", or both
      m    method tags (keys of METHODS)
@@ -493,8 +493,7 @@ const METHODS = {
 
 const TYPES = {
   journal:    "Journal articles",
-  conference: "Conference papers",
-  wp:         "Working papers"
+  conference: "Conference papers"
 };
 
 /* Venue groups shown first under "Journal or conference" and as badges on papers.
@@ -788,27 +787,7 @@ const PUBS = [
   { y: 2015, type: "conference", a: "Ma, W., Wu, L.*",
     t: "Fuzzy Chance-Constrained Programming for Optimal Containership Slot Exchange and Allocation in Liner Alliances",
     vt: "Dalian, China",
-    app: ["maritime"], dm: ["or"], m: [] },
-
-  /* ---------- Working papers ---------- */
-  { type: "wp", a: "Feng, T.&, Sun, Q., Wang, S., Wu, L.*",
-    t: "A nested branch-and-cut approach for robust overnight freight service planning on urban rail transit networks",
-    st: "Under revision at INFORMS Journal on Computing", app: ["land"], dm: ["or"], m: ["robust", "exact"] },
-  { type: "wp", a: "Chen, L., Feng, T., Sun, Q., Wu, L.",
-    t: "Adaptive emergency operations: A three-stage robust optimization model",
-    st: "Under revision at Manufacturing & Service Operations Management", app: ["emergency"], dm: ["or"], m: ["robust"] },
-  { type: "wp", a: "Chen, T.#, Zhang, L., Wu, L.*, Wang, S., Mendoza, J. E.",
-    t: "Electric tugboat scheduling in seaports",
-    st: "Under revision at Transportation Science", app: ["maritime", "green"], dm: ["or"], m: [] },
-  { type: "wp", a: "Kong, H.#, He, P.&, Wu, L.*, Tang, K.#",
-    t: "Equitable hangar slot scheduling for aircraft maintenance",
-    st: "Under revision at Transportation Research Part B", app: ["aviation"], dm: ["or"], m: [] },
-  { type: "wp", a: "Li, M.#, Wu, L., Lusby, R. M., Feng, T.&",
-    t: "The checkpoint dial-a-ride problem with speed optimization for plug-in hybrid electric vehicles",
-    st: "Under revision at Transportation Research Part B", app: ["land", "green"], dm: ["or"], m: [] },
-  { type: "wp", a: "Li, X.&, Lang, H., Wu, L.*, Jiang, C.",
-    t: "Berth allocation and microgrid scheduling in seaports under uncertainty: A two-stage stochastic programming approach",
-    st: "Under revision at European Journal of Operational Research", app: ["maritime", "green"], dm: ["or"], m: ["stoch"] }
+    app: ["maritime"], dm: ["or"], m: [] }
 ];
 
 /* =====================================================================
