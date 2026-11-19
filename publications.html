@@ -1,229 +1,1200 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selected Publications | Dr. Lingxiao Wu</title>
-<link rel="stylesheet" href="style.css">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publications | Lingxiao Wu</title>
+<meta name="description" content="Publications of Lingxiao Wu on operations research and data analytics for aviation, low-altitude and maritime transportation. Filter by application, method, type and journal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<!-- Page layout adapted, with thanks, from Yossiri Adulyasak's site: https://y-adulyasak.github.io/ -->
 <style>
-.pub-list li {
-    margin-bottom: 14px;
-}
+  :root {
+    --paper: #FBFCFD;
+    --surface: #FFFFFF;
+    --ink: #16202C;
+    --muted: #5B6776;
+    --rule: #E2E6EB;
+    --app: #0F6E66;
+    --app-bg: #E5F2F0;
+    --method: #4B3FB8;
+    --method-bg: #EEECFA;
+    --venue: #1F3B5C;
+    --venue-bg: #E8EDF3;
+    --hl: #96490A;
+    --hl-bg: #FBF0E2;
+    --focus: #2563EB;
+    --serif: "Literata", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #10161D;
+      --surface: #151C24;
+      --ink: #E6EBF0;
+      --muted: #9AA6B4;
+      --rule: #27323E;
+      --app: #5CC4B7;
+      --app-bg: #13302E;
+      --method: #ADA4F6;
+      --method-bg: #25224A;
+      --venue: #A3BEDD;
+      --venue-bg: #1C2836;
+      --hl: #F0B26B;
+      --hl-bg: #382814;
+      --focus: #7FA7FF;
+    }
+  }
 
-.note {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 25px;
-}
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
 
-.year {
-    font-weight: bold;
-}
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 36px 24px 64px; }
 
-.scholar-link a {
-    text-decoration: none;
-    font-weight: 500;
-}
+  /* Header */
+  .site-head { margin-bottom: 28px; max-width: 72ch; }
+  .owner { margin: 0 0 6px; font-size: 0.95rem; color: var(--muted); }
+  .owner a { text-decoration: none; }
+  .owner a:hover { text-decoration: underline; }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .lede { margin: 0 0 12px; color: var(--muted); font-size: 1.02rem; }
+  .head-links { display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.92rem; }
+  .head-links a { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .head-links a:hover { text-decoration-color: currentColor; }
 
-.scholar-link a:hover {
-    text-decoration: underline;
-}
+  /* Browse by problem */
+  .problems { margin-bottom: 30px; }
+  .problems-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 12px; }
+  .problems h2 { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; margin: 0; }
+  .hint { color: var(--muted); font-size: 0.88rem; margin: 0; }
+  .problem-grid {
+    display: grid;
+    gap: 8px;
+  }
+  .problem {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--app);
+    border-radius: 6px;
+    padding: 11px 14px 12px;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .problem:hover { background: var(--app-bg); }
+  .problem .p-name {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.28;
+  }
+  .problem .p-count { display: block; margin-top: 3px; font-size: 0.82rem; color: var(--muted); }
+  .problems .problem-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .domains .problem { border-left-color: var(--method); }
+  .domains .problem:hover { background: var(--method-bg); }
+  .domains .problem[aria-pressed="true"] { background: var(--method); border-color: var(--method); }
+  .problems.domains { margin-top: -6px; }
+  .problem[aria-pressed="true"] { background: var(--app); border-color: var(--app); color: var(--paper); }
+  .problem[aria-pressed="true"] .p-count { color: var(--paper); opacity: .85; }
+  .problem:disabled { opacity: .42; cursor: default; }
+  .problem:disabled:hover { background: var(--surface); }
 
-.scholar-icon {
-    height: 18px;
-    vertical-align: middle;
-    margin-right: 6px;
-}
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .rail { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; padding-right: 4px; }
+  .more-filters > summary { display: none; }
+  .fgroup { margin-bottom: 22px; }
+  .fgroup h3 { font-size: 0.92rem; font-weight: 600; margin: 0 0 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.84rem;
+    line-height: 1.3;
+    cursor: pointer;
+    text-align: left;
+  }
+  .chip .n { color: var(--muted); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+  .chip:hover { border-color: var(--muted); }
+  .chip:disabled { opacity: .4; cursor: default; }
+  .chip:disabled:hover { border-color: var(--rule); }
+  .chip[aria-pressed="true"] { color: var(--paper); }
+  .chip[aria-pressed="true"] .n { color: var(--paper); opacity: .8; }
+  .chip-method[aria-pressed="true"] { background: var(--method); border-color: var(--method); }
+  .chip-venue[aria-pressed="true"] { background: var(--venue); border-color: var(--venue); }
+  .chip-type[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .chip-type[aria-pressed="true"] .n { color: var(--paper); opacity: .8; }
+  .chip-hl[aria-pressed="true"] { background: var(--hl); border-color: var(--hl); }
+  .linkish {
+    background: none; border: 0; padding: 0; margin-top: 8px;
+    font-size: 0.84rem; color: var(--muted); cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .linkish:hover { color: var(--ink); }
+
+  /* Toolbar */
+  .toolbar { margin-bottom: 8px; scroll-margin-top: 12px; }
+  .search {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    padding: 10px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .search::placeholder { color: var(--muted); }
+  .status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 12px; min-height: 28px; }
+  #count { margin: 0; font-size: 0.92rem; color: var(--muted); }
+  #count strong { color: var(--ink); font-weight: 600; }
+  .active { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem;
+    padding: 3px 6px 3px 10px;
+    border-radius: 999px;
+    border: 0;
+    cursor: pointer;
+  }
+  .pill .x { font-size: 1rem; line-height: 1; opacity: .7; }
+  .pill-app { background: var(--app-bg); color: var(--app); }
+  .pill-method { background: var(--method-bg); color: var(--method); }
+  .pill-venue { background: var(--venue-bg); color: var(--venue); }
+  .pill-type { background: var(--rule); color: var(--ink); }
+  .pill-hl { background: var(--hl-bg); color: var(--hl); }
+  .pill-dom { background: var(--method-bg); color: var(--method); }
+  .pill-q { background: var(--rule); color: var(--ink); }
+  .actions { display: flex; gap: 14px; margin-left: auto; }
+  .copy-out { width: 100%; font: inherit; font-size: 0.82rem; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); color: var(--ink); margin-top: 8px; }
+
+  /* List */
+  .ygroup {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 0 22px;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  .ylabel {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.2;
+    position: sticky;
+    top: 12px;
+    align-self: start;
+    font-variant-numeric: lining-nums;
+  }
+  .ygroup.named { grid-template-columns: minmax(0, 1fr); }
+  .ygroup.named .ylabel { position: static; font-size: 1.25rem; color: var(--ink); font-weight: 600; margin-bottom: 14px; }
+  .pub { margin: 0 0 24px; max-width: 78ch; }
+  .pub:last-child { margin-bottom: 4px; }
+  .pub-title { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; line-height: 1.38; margin: 0 0 4px; }
+  .pub-authors { margin: 0 0 3px; font-size: 0.92rem; color: var(--muted); }
+  .pub-authors strong { color: var(--ink); font-weight: 600; }
+  .pub-venue { margin: 0; font-size: 0.92rem; }
+  .venue-link {
+    background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+    font-style: italic; color: var(--venue);
+    text-decoration: underline; text-decoration-style: dotted; text-decoration-color: currentColor;
+    text-underline-offset: 3px;
+  }
+  .venue-link:hover { text-decoration-style: solid; }
+  .venue-text { font-style: italic; }
+  .status {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: var(--venue-bg);
+    color: var(--venue);
+    margin-left: 6px;
+    vertical-align: 1px;
+    white-space: nowrap;
+  }
+  .status-text { color: var(--muted); }
+  .award { margin: 6px 0 0; font-size: 0.86rem; color: var(--hl); display: flex; gap: 6px; align-items: flex-start; }
+  .award svg { flex: none; margin-top: 3px; }
+  .award a { color: inherit; }
+  .pub-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 8px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.76rem;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+  .tag-app { background: var(--app-bg); color: var(--app); }
+  .tag-method { background: var(--method-bg); color: var(--method); }
+  .tag-dom { background: transparent; color: var(--method); border-color: var(--method); font-weight: 500; }
+  .tag-dom:hover, .tag-dom.on { background: var(--method-bg); }
+  .hlb {
+    display: inline-block; font: inherit; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em;
+    padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: 2px;
+    background: var(--hl-bg); color: var(--hl); white-space: nowrap;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .hlb:hover, .hlb.on { border-color: currentColor; }
+  .hlb-ind { background: var(--app-bg); color: var(--app); }
+  .venue-sets { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  .tag:hover, .tag.on { border-color: currentColor; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.86rem; }
+  .links a { color: var(--venue); font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--venue) 35%, transparent); text-underline-offset: 3px; }
+  .links a:hover { text-decoration-color: currentColor; }
+
+  .empty-state { border-top: 1px solid var(--rule); padding: 28px 0; }
+  .datasets { border-top: 1px solid var(--rule); margin-top: 28px; padding-top: 20px; max-width: 78ch; scroll-margin-top: 12px; }
+  .datasets h2 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin: 0 0 14px; }
+  .datasets h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; line-height: 1.38; margin: 18px 0 2px; }
+  .datasets .ds-src { margin: 0 0 6px; font-size: 0.9rem; font-style: italic; color: var(--venue); }
+  .datasets ul { margin: 0; padding-left: 1.2em; font-size: 0.94rem; }
+  .datasets li { margin: 4px 0; }
+  .datasets a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+  .empty-state p { margin: 0 0 10px; }
+  .btn {
+    border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+    border-radius: 6px; padding: 7px 14px; font-size: 0.9rem; cursor: pointer;
+  }
+
+  .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--muted); max-width: 78ch; }
+  .foot p { margin: 0 0 6px; }
+
+  /* Responsive */
+  @media (max-width: 899px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .rail { position: static; max-height: none; overflow: visible; padding: 0; margin-bottom: 20px; }
+    .more-filters { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+    .more-filters > summary {
+      display: list-item; cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: 0.95rem;
+    }
+    .more-filters[open] > summary { border-bottom: 1px solid var(--rule); }
+    .more-filters .rail-body { padding: 14px 14px 0; }
+    .ygroup { grid-template-columns: minmax(0, 1fr); }
+    .ylabel { position: static; margin-bottom: 12px; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 22px 16px 48px; }
+    .problems .problem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .problem { padding: 10px 12px; }
+    .problem .p-name { font-size: 0.93rem; }
+    .actions { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+  @media print {
+    .problems, .rail, .toolbar, .tags, .foot { display: none !important; }
+    .layout { display: block; }
+    body { background: #fff; color: #000; }
+    .ylabel { position: static; }
+    .pub { break-inside: avoid; }
+  }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--rule); }
+  .topbar-inner {
+    max-width: 1160px; margin: 0 auto; padding: 14px 24px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px;
+  }
+  .brand { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; text-decoration: none; color: var(--ink); }
+  .nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.93rem; }
+  .nav a { color: var(--muted); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .nav a:hover { color: var(--ink); }
+  .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--app); }
+
+  .site-foot { background: var(--surface); border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.9rem; }
+  .site-foot-inner {
+    max-width: 1160px; margin: 0 auto; padding: 24px 24px 32px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 40px;
+  }
+  .site-foot p { margin: 0 0 4px; }
+  .site-foot .foot-name { color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 1rem; }
+  .site-foot a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .site-foot a:hover { text-decoration-color: currentColor; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  @media (max-width: 600px) {
+    .topbar-inner, .site-foot-inner { padding-left: 16px; padding-right: 16px; }
+  }
+  @media print { .topbar, .site-foot { display: none !important; } }
+  .pub-authors sup { font-size: 0.72em; line-height: 0; }
+  .legend { margin: 0 0 12px; font-size: 0.9rem; color: var(--muted); }
+
 </style>
 </head>
+<body>
+<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">Lingxiao Wu</a><nav class="nav" aria-label="Site"><a href="index.html">Home</a><a href="cv.html">Brief CV</a><a href="publications.html" aria-current="page">Publications</a><a href="team.html">Research team</a><a href="links.html">Links</a></nav></div></header>
+<div class="wrap">
+  <header class="site-head">
+    <h1>Publications</h1>
+    <p class="lede" id="lede"></p>
+    <p class="legend"><sup>#</sup> student supervised by Dr. Wu &nbsp;·&nbsp; <sup>&amp;</sup> postdoctoral fellow working with Dr. Wu &nbsp;·&nbsp; <sup>*</sup> corresponding author</p>
+    <p class="head-links"><a href="https://scholar.google.com/citations?user=T58g-2MAAAAJ&amp;hl=en">Google Scholar profile</a></p>
+  </header>
 
-<body class="light">
+  <section class="problems" aria-labelledby="problems-h">
+    <div class="problems-head">
+      <h2 id="problems-h">Browse by application</h2>
+      <p class="hint">Select one or more. Select again to remove.</p>
+    </div>
+    <div class="problem-grid" id="problem-grid"></div>
+  </section>
 
-<header>
-    <div><strong>Dr. Lingxiao Wu</strong></div>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="publications.html">Selected Publications</a>
-        <a href="students.html">PhD / MPhil Students</a>
-        <button onclick="toggleMode()">🌙</button>
-    </nav>
-</header>
+  <section class="problems domains" aria-labelledby="domains-h">
+    <div class="problems-head">
+      <h2 id="domains-h">Browse by methodological domain</h2>
+      <p class="hint">Papers that draw on both carry both labels.</p>
+    </div>
+    <div class="problem-grid" id="domain-grid"></div>
+  </section>
 
-<div class="container">
+  <div class="layout">
+    <aside class="rail" aria-label="Filters">
+      <details class="more-filters" id="more-filters">
+        <summary>Filter by method, type and journal <span id="more-count"></span></summary>
+        <div class="rail-body">
+          <div class="fgroup"><h3>Method</h3><div class="chips" id="chips-method"></div></div>
+          <div class="fgroup"><h3>Type</h3><div class="chips" id="chips-type"></div></div>
+          <div class="fgroup">
+            <h3>Journal or conference</h3>
+            <div class="chips venue-sets" id="chips-vset"></div>
+            <div class="chips" id="chips-venue"></div>
+            <button type="button" class="linkish" id="venue-toggle"></button>
+          </div>
+        </div>
+      </details>
+    </aside>
 
-<h1>Selected Publications (20 out of all)</h1>
+    <main class="results">
+      <div class="toolbar" id="toolbar">
+        <label for="q" class="sr-only">Search publications</label>
+        <input id="q" class="search" type="search" placeholder="Search titles, authors and venues" autocomplete="off">
+        <div class="status-row">
+          <p id="count" aria-live="polite"></p>
+          <div class="active" id="active"></div>
+          <div class="actions">
+            <button type="button" class="linkish" id="copy-link" style="margin-top:0">Copy link to this view</button>
+            <button type="button" class="linkish" id="clear" style="margin-top:0">Clear filters</button>
+          </div>
+        </div>
+        <div id="copy-slot"></div>
+      </div>
+      <div id="list"></div>
+      <noscript><p>This list needs JavaScript to display. A full list is on <a href="https://scholar.google.com/citations?user=T58g-2MAAAAJ&amp;hl=en">Google Scholar</a>.</p></noscript>
+    </main>
+  </div>
 
-<div class="note scholar-link">
-    A complete and up-to-date list of publications can be found on 
-    <a href="https://scholar.google.com/citations?user=T58g-2MAAAAJ&hl=en" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Google_Scholar_logo.png" 
-             alt="Google Scholar" class="scholar-icon">
-        Google Scholar
-    </a>.
-</div>
-<div class="note" style="margin-top:30px;">
-    <strong>Notes:</strong><br>
-    #: Students supervised by Dr Wu.<br>
-    &: Postdoctoral fellows working with Dr Wu.<br>
-    *: Corresponding author.
-</div>
-<ul class="pub-list">
-
-<li><span class="year">2026.</span>
-Kaixiang Tang#, Ling Zhu#, <strong>Lingxiao Wu*</strong>, Jean-François Cordeau, Yixiao Huang, 
-Air Service Hub Network Design for Express Delivery Operations,
-<em>Transportation Science</em>.
-<a>[To appear]</a>
-</li> 
-    
-<li><span class="year">2026.</span>
-Xiangda Li&, <strong>Lingxiao Wu</strong>, Jiangang Jin, Ping He&*, 
-Optimal maintenance scheduling and vessel routing in offshore wind farms: A tailored column generation approach,
-<em>IISE Transactions</em>.
-<a href="https://www.tandfonline.com/doi/full/10.1080/24725854.2026.2738009" target="_blank">[Link]</a>
-</li>   
-
-<li><span class="year">2026.</span>
-<strong>Lingxiao Wu</strong>, Wenxuan Shan*, Yossiri Adulyasak, Jean-François Cordeau, 
-Scalable Multi-Stage Stochastic Optimization for Freight Procurement in Transportation-Inventory Systems,
-<em>INFORMS Journal on Computing</em>.
-<a href="https://pubsonline.informs.org/doi/10.1287/ijoc.2025.1141" target="_blank">[Link]</a>
-</li>
-    
-<li><span class="year">2026.</span>
-Wenbo Sun, <strong>Lingxiao Wu</strong>, Fangni Zhang*, 
-An exact algorithm to solve vehicle routing problem with drones for delivery and surveillance tasks after disaster,
-<em>Transportation Science</em>.
-<a href="https://doi.org/10.1287/trsc.2024.0987" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2026.</span>
-Xinyi Li#, Xiao Chu#, <strong>Lingxiao Wu</strong>*, Suwan Yin, Xin Yang,
-Data-Driven Predict-then-Optimize Framework for Landing Scheduling with Hybrid Descent Modes,
-<em>Transportation Research Part B</em>.
-<a href="https://doi.org/10.1016/j.trb.2026.103535" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2026.</span>
-Ling Zhu#, Simon Belieres, Mike Hewitt, <strong>Lingxiao Wu</strong>*,
-Joint fleet scheduling and cargo flow allocation for air cargo services,
-<em>Transportation Research Part B</em>.
-<a href="https://doi.org/10.1016/j.trb.2026.103469" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2026.</span>
-Wenbo Sun, <strong>Lingxiao Wu</strong>, Fangni Zhang,
-Robust optimization for truck-and-drone collaboration with travel time uncertainties,
-<em>Transportation Research Part B</em>.
-<a href="https://doi.org/10.1016/j.trb.2025.103378" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2025.</span>
-Runqing Zhao, Shengnan Shu, <strong>Lingxiao Wu</strong>, Shuai Jia*,
-Robust vessel traffic scheduling with uncertain berth service times in a seaport,
-<em>Transportation Research Part B</em>.
-<a href="https://doi.org/10.1016/j.trb.2025.103294" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2025.</span>
-Ping He&, <strong>Lingxiao Wu</strong>*, Jiangang Jin, Shaorui Zhou, Frederik Schulte,
-Distributionally robust optimization of sailing speed, bunkering, and fuel switching for dual-fuel liner services,
-<em>Transportation Research Part C</em>.
-<a href="https://doi.org/10.1016/j.trc.2026.105528" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2025.</span>
-Tingting Chen#, <strong>Lingxiao Wu</strong>*, Shuaian Wang,
-Dynamic speed optimization and berth reallocation for autonomous vessels under sailing time disturbances,
-<em>IEEE Transactions on Intelligent Transportation Systems</em>.
-<a href="https://ieeexplore.ieee.org/document/11297429" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2025.</span>
-Zhou Miao#, Hao Lang, <strong>Lingxiao Wu</strong>*, Changmin Jiang,
-Strategic fleet management for airlines,
-<em>Transportation Research Part A</em>.
-<a href="https://doi.org/10.1016/j.tra.2025.104733" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2025.</span>
-Ziming Wang#, Dabin Xue*, <strong>Lingxiao Wu</strong>*, Ran Yan,
-A reliable predict-then-optimize approach for minimizing aircraft fuel consumption,
-<em>Transportation Research Part D</em>.
-<a href="https://doi.org/10.1016/j.trd.2025.104693" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2022.</span>
-<strong>Lingxiao Wu</strong>*, Yossiri Adulyasak, Jean-François Cordeau, Shuaian Wang,
-Vessel service planning in seaports,
-<em>Operations Research</em>.
-<a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2021.2228" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2022.</span>
-Xiaofan Lai, <strong>Lingxiao Wu</strong>*, Kai Wang, Fan Wang,
-Robust ship fleet deployment with shipping revenue management,
-<em>Transportation Research Part B</em>.
-<a href="https://www.sciencedirect.com/science/article/abs/pii/S0191261522000765" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2021.</span>
-<strong>Lingxiao Wu</strong>, Shuaian Wang*, Gilbert Laporte,
-The robust bulk ship routing problem with batched cargo selection,
-<em>Transportation Research Part B</em>.
-<a href="http://doi.org/10.1016/j.trb.2020.11.003" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2020.</span>
-Shuai Jia*, <strong>Lingxiao Wu</strong>, Qiang Meng,
-Joint scheduling of vessel traffic and pilots in seaport waters,
-<em>Transportation Science</em>.
-<a href="https://doi.org/10.1287/trsc.2020.0990" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2020.</span>
-<strong>Lingxiao Wu</strong>, Shuai Jia, Shuaian Wang*,
-Pilotage planning in seaports,
-<em>European Journal of Operational Research</em>.
-<a href="https://doi.org/10.1016/j.ejor.2020.05.009" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2020.</span>
-<strong>Lingxiao Wu</strong>, Shuaian Wang*,
-The shore power deployment problem for maritime transportation,
-<em>Transportation Research Part E</em>.
-<a href="https://doi.org/10.1016/j.tre.2020.101883" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2018.</span>
-<strong>Lingxiao Wu</strong>, Kai Pan*, Shuaian Wang, Dong Yang,
-Bulk ship scheduling in industrial shipping,
-<em>Transportation Research Part B</em>.
-<a href="https://doi.org/10.1016/j.trb.2018.08.016" target="_blank">[Link]</a>
-</li>
-
-<li><span class="year">2017.</span>
-<strong>Lingxiao Wu</strong>, Weimin Ma*,
-Quay crane scheduling with draft and trim constraints,
-<em>Transportation Research Part E</em>.
-<a href="https://www.sciencedirect.com/science/article/pii/S1366554516303179" target="_blank">[Link]</a>
-</li>
-
-</ul>
-
+  <footer class="foot">
+    <p id="updated"></p>
+    <p>Tags group each work by application, methodological domain and method. Click any tag or venue name in the list to filter by it.</p>
+  </footer>
 </div>
 
-<footer>
-© 2026 Dr. Lingxiao Wu
-</footer>
+<footer class="site-foot"><div class="site-foot-inner">
+  <div>
+    <p class="foot-name">Lingxiao Wu</p>
+    <p>Department of Aeronautical and Aviation Engineering</p>
+    <p>The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong</p>
+  </div>
+  <div>
+    <p class="foot-links"><a href="https://scholar.google.com/citations?user=T58g-2MAAAAJ&amp;hl=en">Google Scholar</a><a href="https://www.polyu.edu.hk/aae/people/academic-staff/dr-wu-lingxiao/">PolyU profile</a><a href="https://github.com/LingxiaoWu2021">GitHub</a></p>
+  </div>
+</div></footer>
 
 <script>
-function toggleMode() {
-    document.body.classList.toggle("dark");
-    document.body.classList.toggle("light");
-}
-</script>
+/* =====================================================================
+   DATA — edit this section to add or change publications.
 
+   Each entry:
+     y    year (number), omit for working papers
+     a    authors, exactly as you want them shown. Markers after a name:
+            #  student supervised by Dr. Wu
+            &  postdoctoral fellow working with Dr. Wu
+            *  corresponding author
+     t    title
+     v    venue key from VENUES below (omit if none)
+     vt   venue text to show instead of the VENUES full name (optional)
+     d    volume, issue, pages or article number (optional)
+     st   status, e.g. "To appear", "In press", "Under revision at ..." (optional)
+     type journal | conference | wp
+     app  application tags (keys of APPS)
+     dm   methodological domain(s): "or", "ml", or both
+     m    method tags (keys of METHODS)
+     aw   awards: [["Award text", "url or null"]]
+     l    links: [["Label", "url"]]
+
+   UTD24 and "TS / TR-B" labels are not set per paper: they come from
+   the utd / flag settings on the venue in VENUES, and apply to
+   published journal and conference papers only.
+   ===================================================================== */
+
+const UPDATED = "November 2026";
+
+const APPS = {
+  aviation:  ["Aviation & Airports", "Airline fleet and maintenance planning, air cargo, air traffic and landing scheduling, airport operations"],
+  lae:       ["Drones & Low-Altitude Mobility", "Drone and truck-and-drone delivery, urban air mobility, vertiport location"],
+  maritime:  ["Shipping & Ports", "Berth allocation, vessel service planning, pilotage and towage, liner and bulk shipping, container terminals"],
+  land:      ["Road, Rail & Transit", "Trucks, public transit, urban rail, vehicle routing and shared mobility"],
+  green:     ["Electrification & Sustainability", "Electric fleets and charging, alternative fuels, fuel consumption and emissions"],
+  emergency: ["Emergency & Disaster Response", "Disaster relief, rescue, evacuation and emergency operations"],
+  scm:       ["Logistics & Supply Chains", "Freight procurement, supply chains, reverse logistics and scheduling"]
+};
+
+const DOMAINS = {
+  or: ["Operations Research", "Optimization, stochastic and robust models, decomposition and exact algorithms"],
+  ml: ["Machine Learning & Data Analytics", "Prediction, deep learning, reinforcement learning and data analytics"]
+};
+
+/* Filters list methods, types, applications and domains in the order written here. */
+const METHODS = {
+  stoch:  "Stochastic optimization",
+  robust: "Robust & distributionally robust",
+  exact:  "Exact & decomposition algorithms",
+  heur:   "Heuristics",
+  dd:     "Data-driven & predict-then-optimize",
+  ml:     "Machine learning & deep learning",
+  rl:     "Reinforcement learning",
+  llm:    "LLMs",
+  emp:    "Empirical, economic & policy analysis",
+  review: "Literature reviews"
+};
+
+const TYPES = {
+  journal:    "Journal articles",
+  conference: "Conference papers",
+  wp:         "Working papers"
+};
+
+/* Venue groups shown first under "Journal or conference" and as badges on papers.
+   Membership comes from the utd / flag settings in VENUES below. */
+const HIGHLIGHTS = {
+  utd:  ["UTD24", "Journals used in the UT Dallas business school research rankings"],
+  flag: ["TS / TR-B", "Transportation Science and Transportation Research Part B"]
+};
+
+/* Journals and conferences. The filter lists them in the order written here:
+   move a line up or down to change the order. The first VENUES_SHOWN appear
+   before "Show all"; the rest appear when it is clicked.
+   filter: false keeps a venue on its papers but leaves it out of the filter.
+
+   This section is JavaScript: to switch a line off, start it with //
+   HTML comment markers (less-than, exclamation, dash, dash) break the page. */
+const VENUES_SHOWN = 14;
+
+const VENUES = {
+  or:    { s: "Operations Research",          f: "Operations Research", utd: true },
+  ts:    { s: "Transportation Science",       f: "Transportation Science", flag: true },
+  ijoc:  { s: "INFORMS J. on Computing",      f: "INFORMS Journal on Computing", utd: true },
+  trb:   { s: "Transportation Research B",    f: "Transportation Research Part B: Methodological", flag: true },
+  iise:  { s: "IISE Transactions",            f: "IISE Transactions" },
+  ejor:  { s: "EJOR",                         f: "European Journal of Operational Research" },
+  tre:   { s: "Transportation Research E",    f: "Transportation Research Part E: Logistics and Transportation Review" },
+  trc:   { s: "Transportation Research C",    f: "Transportation Research Part C: Emerging Technologies" },
+  tra:   { s: "Transportation Research A",    f: "Transportation Research Part A: Policy and Practice" },
+  trd:   { s: "Transportation Research D",    f: "Transportation Research Part D: Transport and Environment" },
+  omega: { s: "Omega",                        f: "Omega" },
+  cor:   { s: "Computers & OR",               f: "Computers & Operations Research" },
+  tits:  { s: "IEEE T-ITS",                   f: "IEEE Transactions on Intelligent Transportation Systems" },
+  jatm:  { s: "J. of Air Transport Management", f: "Journal of Air Transport Management" },
+  cie:   { s: "Computers & Industrial Eng.",  f: "Computers & Industrial Engineering" },
+  aei:   { s: "Advanced Eng. Informatics",    f: "Advanced Engineering Informatics" },
+  eaai:  { s: "Eng. Applications of AI",      f: "Engineering Applications of Artificial Intelligence" },
+  eswa:  { s: "Expert Systems with Applications", f: "Expert Systems with Applications" },
+  ast:   { s: "Aerospace Science & Technology", f: "Aerospace Science and Technology" },
+  ijpe:  { s: "Int. J. of Production Economics", f: "International Journal of Production Economics" },
+  tma:   { s: "Transportmetrica A",           f: "Transportmetrica A: Transport Science" },
+  trev:  { s: "Transport Reviews",            f: "Transport Reviews" },
+  mpm:   { s: "Maritime Policy & Management", f: "Maritime Policy & Management" },
+  trr:   { s: "Transportation Research Record", f: "Transportation Research Record" },
+  engm:  { s: "ENGINEERING Management",       f: "ENGINEERING Management" },
+  tem:   { s: "Transport Economics & Management", f: "Transport Economics and Management" },
+  sw:    { s: "Space Weather",                f: "Space Weather" },
+  mbr:   { s: "Maritime Business Review",     f: "Maritime Business Review" },
+  hksts: { s: "HKSTS Conference",             f: "International Conference of Hong Kong Society for Transportation Studies" }
+};
+
+const PUBS = [
+  /* ---------- 2026 ---------- */
+  { y: 2026, type: "journal", a: "Tang, K.#, Zhu, L.#, Wu, L.*, Cordeau, J.-F., Huang, Y.",
+    t: "Air service hub network design for express delivery operations",
+    v: "ts", st: "To appear", app: ["aviation"], dm: ["or"], m: [] },
+  { y: 2026, type: "journal", a: "Li, X.&, Wu, L., Jin, J. G., He, P.&*",
+    t: "Optimal maintenance scheduling and vessel routing in offshore wind farms: A tailored column generation approach",
+    v: "iise", st: "In press", app: ["maritime", "green"], dm: ["or"], m: ["exact"],
+    l: [["Paper", "https://www.tandfonline.com/doi/full/10.1080/24725854.2026.2738009"]] },
+  { y: 2026, type: "journal", a: "Wu, L., Shan, W.*, Adulyasak, Y., Cordeau, J.-F.",
+    t: "Scalable multistage stochastic optimization for freight procurement in transportation-inventory systems",
+    v: "ijoc", st: "In press", app: ["scm"], dm: ["or"], m: ["stoch", "exact"],
+    l: [["Paper", "https://pubsonline.informs.org/doi/10.1287/ijoc.2025.1141"], ["Working paper", "https://www.gerad.ca/fr/papers/G-2022-19.pdf"]] },
+  { y: 2026, type: "journal", a: "Li, X.#, Chu, X.#, Wu, L.*, Yin, S., Yang, X.",
+    t: "Data-Driven Predict-then-Optimize Framework for Landing Scheduling with Hybrid Descent Modes",
+    v: "trb", st: "In press", app: ["aviation"], dm: ["or", "ml"], m: ["dd"],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2026.103535"]] },
+  { y: 2026, type: "journal", a: "Li, X.&, Lang, H., Wu, L.*, Jiang, C.",
+    t: "Promoting green port-hinterland transportation: A branch-and-price algorithm for electric truck charging management",
+    v: "tre", d: "214, 105047", app: ["maritime", "land", "green"], dm: ["or"], m: ["exact"] },
+  { y: 2026, type: "journal", a: "Jin, Z., Wang, S., Chen, J., Wu, L., Wang, Z.#",
+    t: "Data-driven optimization of a mixed fleet of drones and human couriers for on-demand delivery under uncertainty",
+    v: "tre", d: "214, 105010", app: ["lae"], dm: ["or"], m: ["dd"] },
+  { y: 2026, type: "journal", a: "Chen, Z., Zeng, W., Wu, L., Jiang, H., Quan, Z.",
+    t: "CL-DFTC: A deep flight trajectory clustering framework based on self-supervised contrastive learning",
+    v: "trc", d: "190, 105786", app: ["aviation"], dm: ["ml"], m: ["ml"] },
+  { y: 2026, type: "journal", a: "Hou, X.#, Zhang, L., Chen, S.#, Wu, L.*",
+    t: "Fleet scheduling for electric towing of aircraft with nonlinear charging profile and on-demand charging strategy",
+    v: "jatm", d: "136, 103034", app: ["aviation", "green"], dm: ["or"], m: [] },
+  { y: 2026, type: "journal", a: "Zhu, L.#, Belieres, S., Hewitt, M., Wu, L.*",
+    t: "Joint fleet scheduling and cargo flow allocation for air cargo services",
+    v: "trb", d: "209, 103469", app: ["aviation"], dm: ["or"], m: [],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2026.103469"]] },
+  { y: 2026, type: "journal", a: "Wang, Y., Zhang, L., Guo, Y., Wu, L.",
+    t: "Towards automated optimization algorithm design with LLM: An exploratory study in multi-objective weather routing",
+    v: "tre", d: "210, 104786", app: ["maritime"], dm: ["or", "ml"], m: ["llm"] },
+  { y: 2026, type: "journal", a: "Zhang, C., Jin, Z., Ng, K. K., Liu, Y., Wu, L.",
+    t: "Stabilised branch-and-check method for optimising multi-runway aircraft landing problem modelled through stochastic programming with learning-driven arrival time predictions",
+    v: "tre", d: "210, 104763", app: ["aviation"], dm: ["or", "ml"], m: ["stoch", "exact", "dd"] },
+  { y: 2026, type: "journal", a: "Wu, Y., Yu, Y., Wu, L., Feng, T.&, Zhang, L., Wang, Z., Gao, J.",
+    t: "Deep reinforcement learning approach to solving clustered vehicle routing problems",
+    v: "tre", d: "209, 104742", app: ["land"], dm: ["or", "ml"], m: ["rl"] },
+  { y: 2026, type: "journal", a: "Zhou, S., Pan, J., Zhao, M., Wu, L.*, Li, W.",
+    t: "Data-driven vertiport location optimization for urban air mobility",
+    v: "engm", st: "Online", app: ["lae"], dm: ["or"], m: ["dd"] },
+  { y: 2026, type: "journal", a: "Zhang, T., Li, A., Wu, L., Jiang, C.",
+    t: "Airport accessibility assessment and shuttle bus scheduling across socioeconomic groups",
+    v: "tra", d: "206, 104918", app: ["aviation", "land"], dm: ["or"], m: [] },
+  { y: 2026, type: "journal", a: "Sun, W., Zhang, F., Wu, L., Kuo, Y. H.",
+    t: "Route optimisation of truck-and-drone systems for multi-type rescue tasks: a heuristic approach",
+    v: "tma", st: "Online", app: ["lae", "emergency"], dm: ["or"], m: ["heur"] },
+  { y: 2026, type: "journal", a: "He, P.&, Wu, L.*, Jin, J. G., Zhou, S., Schulte, F.",
+    t: "Distributionally robust optimization of sailing speed, bunkering, and fuel switching for dual-fuel liner services",
+    v: "trc", d: "184, 105528", app: ["maritime", "green"], dm: ["or"], m: ["robust"],
+    l: [["Paper", "https://doi.org/10.1016/j.trc.2026.105528"]] },
+  { y: 2026, type: "journal", a: "Zheng, H., Wang, Z.#, Wu, L.",
+    t: "Disruption-responsive berth allocation and quay crane scheduling with inter-terminal collaboration",
+    v: "eswa", d: "298, 129776", app: ["maritime"], dm: ["or"], m: [] },
+  { y: 2026, type: "journal", a: "Feng, Y., Feng, T.&, Wu, L., Yin, Y.",
+    t: "Coordinated planning of autonomous rail rapid transit trains with flexible coupling operations and demand-responsive high-speed rail shuttle buses with same-platform transfers",
+    v: "cie", d: "111906", app: ["land"], dm: ["or"], m: [] },
+  { y: 2026, type: "journal", a: "Sun, W., Wu, L., Zhang, F.",
+    t: "Robust optimization for truck-and-drone collaboration with travel time uncertainties",
+    v: "trb", d: "204, 103378", app: ["lae"], dm: ["or"], m: ["robust"],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2025.103378"]] },
+  { y: 2026, type: "journal", a: "Sun, W., Wu, L., Zhang, F.",
+    t: "An Exact Algorithm to Solve Vehicle Routing Problem with Drones for Delivery and Surveillance Tasks After Disasters",
+    v: "ts", d: "60, 132–154", app: ["lae", "emergency"], dm: ["or"], m: ["exact"],
+    l: [["Paper", "https://doi.org/10.1287/trsc.2024.0987"]] },
+  { y: 2026, type: "journal", a: "Guo, Y., Wang, Y., Zhang, L., Wu, L., Chen, X.",
+    t: "Towards sustainable shipping: A learning-aided route-speed joint optimization considering energy efficiency and punctual arrival",
+    v: "tre", d: "205, 104489", app: ["maritime", "green"], dm: ["or", "ml"], m: ["ml"] },
+
+  /* ---------- 2025 ---------- */
+  { y: 2025, type: "conference", a: "Lau, Y., Wu, L.*",
+    t: "A Comparative Analysis on Implications of High-speed Rail on Domestic Air Travel Demand",
+    v: "hksts", vt: "Proceedings of the 29th International Conference of Hong Kong Society for Transportation Studies",
+    app: ["aviation", "land"], dm: [], m: ["emp"] },
+  { y: 2025, type: "journal", a: "Miao, Z.#, Lang, H., Wu, L.*, Jiang, C.",
+    t: "Strategic Fleet Management for Airlines: Balancing Sustainability, Profitability, and Policy Implications",
+    v: "tra", d: "203, 104733", app: ["aviation", "green"], dm: ["or"], m: [],
+    l: [["Paper", "https://doi.org/10.1016/j.tra.2025.104733"]] },
+  { y: 2025, type: "journal", a: "Chen, T.#, Wu, L.*, Wang, S.",
+    t: "Dynamic Speed Optimization and Berth Reallocation for Autonomous Vessels Under Sailing Time Disturbances",
+    v: "tits", d: "27, 3283–3294", app: ["maritime"], dm: ["or"], m: [],
+    l: [["Paper", "https://ieeexplore.ieee.org/document/11297429"]] },
+  { y: 2025, type: "journal", a: "Zhou, S., Liu, X., Chen, J., Zhao, M., Wang, F., Wu, L.",
+    t: "Joint optimization of slot and empty container co-allocation for liner alliances with uncertain demand in maritime logistics industry",
+    v: "tre", d: "204, 104437", app: ["maritime"], dm: ["or"], m: [] },
+  { y: 2025, type: "journal", a: "Lyu, M., Liu, W., He, Q., Wu, L.",
+    t: "Urban food delivery service optimisation with coordinated delivery riders and drones",
+    v: "tre", d: "204, 104412", app: ["lae"], dm: ["or"], m: [] },
+  { y: 2025, type: "journal", a: "Li, X.&, Wu, L.*, Lang, H., Jin, Z., He, P.&",
+    t: "A critical literature review on layout designs and handling technology in traditional and automated container terminals",
+    v: "tem", d: "3, 269–280", app: ["maritime"], dm: [], m: ["review"] },
+  { y: 2025, type: "journal", a: "Liao, X.#, Wu, L.*, Shu, S., Zhao, H.",
+    t: "Stochastic ship repositioning optimization in tramp spot market with a cargo selection mechanism",
+    v: "mpm", st: "Online", app: ["maritime"], dm: ["or"], m: ["stoch"] },
+  { y: 2025, type: "journal", a: "Zhang, L., Bian, L., Jiang, C., Wu, L.*",
+    t: "A comprehensive framework for estimating aircraft fuel consumption based on flight trajectories",
+    v: "tre", d: "203, 104339", app: ["aviation", "green"], dm: ["ml"], m: [] },
+  { y: 2025, type: "journal", a: "Feng, Z., Luo, N., Wu, L., Liu, Y., Sima, H.",
+    t: "Preservation modes and channel leadership in seafood supply chains: A comparative study of chilled and frozen strategies",
+    v: "tre", d: "203, 104355", app: ["scm"], dm: [], m: ["emp"] },
+  { y: 2025, type: "journal", a: "Jin, Z., Li, P., Li, Y., Ma, D., Ren, X., Wu, L.",
+    t: "Target-oriented distributionally robust optimization for battery swapping in shared micromobility systems",
+    v: "omega", d: "103436", app: ["land", "green"], dm: ["or"], m: ["robust"] },
+  { y: 2025, type: "journal", a: "Zhao, R., Shu, S., Wu, L., Jia, S.",
+    t: "Robust vessel traffic scheduling with uncertain berth service times in a seaport",
+    v: "trb", d: "200, 103294", app: ["maritime"], dm: ["or"], m: ["robust"],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2025.103294"]] },
+  { y: 2025, type: "journal", a: "Du, S., Zhong, G., Wang, F., Wu, L., Xue, D.",
+    t: "A framework for collaborative UAM traffic flow optimization with mission preferences: incorporating customized strategy synergy into strategic conflict management",
+    v: "tre", st: "In press", app: ["lae"], dm: ["or"], m: [] },
+  { y: 2025, type: "journal", a: "Chu, X.#, Chen, S.#, Wang, K., Wu, L.*, Xu, G.",
+    t: "A cost-efficiency analysis of drones in revolutionizing intra-city express services",
+    v: "aei", d: "65, 103324", app: ["lae"], dm: ["or"], m: ["emp"] },
+  { y: 2025, type: "journal", a: "Wang, Z.#, Xue, D., Wu, L.*, Yan, R.",
+    t: "A reliable predict-then-optimize approach for minimizing aircraft fuel consumption",
+    v: "trd", d: "142, 104693", app: ["aviation", "green"], dm: ["or", "ml"], m: ["dd"],
+    l: [["Paper", "https://doi.org/10.1016/j.trd.2025.104693"]] },
+  { y: 2025, type: "journal", a: "Chu, X.#, Zeng, W., Wu, L.*",
+    t: "Joint prediction of multi-aircraft trajectories in terminal airspace: A Flight Pattern-Guided Social Long-Short Term Memory network",
+    v: "eaai", d: "147, 110325", app: ["aviation"], dm: ["ml"], m: ["ml"] },
+  { y: 2025, type: "journal", a: "Chen, H., Zhou, Z., Wu, L., Fu, Y., Xue, D.",
+    t: "Enhancing air traffic complexity assessment through deep metric learning: A CNN-Based approach",
+    v: "ast", d: "160, 110090", app: ["aviation"], dm: ["ml"], m: ["ml"] },
+  { y: 2025, type: "journal", a: "Hu, S., Hu, Q.M., Lu, Z., Wu, L.",
+    t: "Rescue network design considering uncertainty and deprivation cost in urban waterlogging disaster relief",
+    v: "ejor", d: "327, 280–294", app: ["emergency"], dm: ["or"], m: [] },
+  { y: 2025, type: "journal", a: "Yang, X., Cao, W., Wang, K., Yin, H., Wu, J., Wu, L.",
+    t: "Integrated scheduling of truck and drone fleets for cargo transportation in post-disaster relief: A two-stage stochastic optimization approach",
+    v: "tre", d: "196, 104015", app: ["lae", "emergency"], dm: ["or"], m: ["stoch"] },
+  { y: 2025, type: "journal", a: "Li, M.#, Wu, L.*, Wang, Y., Tang, J., Feng, T.&",
+    t: "The flex-route transit planning problem with meeting points",
+    v: "tre", d: "195, 103981", app: ["land"], dm: ["or"], m: [] },
+  { y: 2025, type: "journal", a: "Chen, T.#, Wu, L.*, Wang, S., Jia, S., Liu, W.",
+    t: "Tugboat electrification planning for container ports",
+    v: "trd", d: "139, 104565", app: ["maritime", "green"], dm: ["or"], m: [] },
+  { y: 2025, type: "journal", a: "Xin, X., Zhang, T., Wang, X., He, F., Wu, L.",
+    t: "Risk-averse distributionally robust optimization for construction waste reverse logistics with a joint chance constraint",
+    v: "cor", d: "173, 106829", app: ["scm"], dm: ["or"], m: ["robust"] },
+
+  /* ---------- 2024 ---------- */
+  { y: 2024, type: "journal", a: "Xue, D., Wu, L., Xu, T., Wu, C.L., Wang, Z., He, Z.",
+    t: "Space weather effects on transportation systems: A review of current understanding and future outlook",
+    v: "sw", d: "22(12), e2024SW004055", app: [], dm: [], m: ["review"] },
+  { y: 2024, type: "journal", a: "Tan, Z., Du, L., Wang, M., Yang, H., Wu, L.*",
+    t: "Fleet sizing with time and voyage-chartered vessels for an oil shipping company under demand uncertainty",
+    v: "tre", d: "192, 103801", app: ["maritime"], dm: ["or"], m: [] },
+  { y: 2024, type: "journal", a: "Guo, Y., Wang, Y., Chen, Y., Wu, L., Mao, W.",
+    t: "Learning-based Pareto-optimum routing of ships incorporating uncertain meteorological and oceanographic forecasts",
+    v: "tre", d: "192, 103786", app: ["maritime"], dm: ["or", "ml"], m: ["ml"] },
+  { y: 2024, type: "journal", a: "Wang, J., Xu, S., Wu, L., Wu, S., Liu, Y.",
+    t: "Multidimensional container shipping alliance decisions among competitors: Impact of capacity constraints and market competition",
+    v: "tre", d: "190, 103694", app: ["maritime"], dm: [], m: ["emp"] },
+  { y: 2024, type: "journal", a: "Yan, R., Chu, Z., Wu, L.*, Wang, S.",
+    t: "Predicting vessel service time: A data-driven approach",
+    v: "aei", d: "62, 102718", app: ["maritime"], dm: ["ml"], m: ["ml"] },
+  { y: 2024, type: "journal", a: "Chen, S.#, Wu, L.*, Ng, K. K., Liu, W., Wang, K.",
+    t: "How airports enhance the environmental sustainability of operations: A critical review from the perspective of Operations Research",
+    v: "tre", d: "183, 103440", app: ["aviation", "green"], dm: ["or"], m: ["review"] },
+  { y: 2024, type: "journal", a: "Jin, Z., Ng, K. K., Zhang, C., Wu, L., Li, A.",
+    t: "Integrated optimisation of strategic planning and service operations for urban air mobility systems",
+    v: "tra", d: "183, 104059", app: ["lae"], dm: ["or"], m: [] },
+  { y: 2024, type: "journal", a: "Hu, Q., Gu, W., Wu, L., Zhang, L.",
+    t: "Optimal autonomous truck platooning with detours, nonlinear costs, and a platoon size constraint",
+    v: "tre", d: "186, 103545", app: ["land"], dm: ["or"], m: [] },
+
+  /* ---------- 2022 ---------- */
+  { y: 2022, type: "journal", a: "Wu, L.*, Adulyasak, Y., Cordeau, J.-F., Wang, S.",
+    t: "Vessel service planning in seaports",
+    v: "or", d: "70(4), 2032–2053", app: ["maritime"], dm: ["or"], m: ["exact"],
+    l: [["Paper", "https://pubsonline.informs.org/doi/abs/10.1287/opre.2021.2228"], ["Code", "https://github.com/LingxiaoWu2021/VSPP"]] },
+  { y: 2022, type: "journal", a: "Lai, X., Wu, L.*, Wang, K., Wang, F.",
+    t: "Robust ship fleet deployment with shipping revenue management",
+    v: "trb", d: "161, 169–196", app: ["maritime"], dm: ["or"], m: ["robust"],
+    l: [["Paper", "https://www.sciencedirect.com/science/article/abs/pii/S0191261522000765"]] },
+
+  /* ---------- 2021 ---------- */
+  { y: 2021, type: "journal", a: "Wu, L., Wang, S., Laporte, G.",
+    t: "The robust bulk ship routing problem with batched cargo selection",
+    v: "trb", d: "143, 124–159", app: ["maritime"], dm: ["or"], m: ["robust"],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2020.11.003"]] },
+  { y: 2021, type: "journal", a: "Yang, D., Wu, L., Wang, S.",
+    t: "Can we trust the AIS destination port information for bulk ships? Implications for shipping policy and practice",
+    v: "tre", d: "149, 102308", app: ["maritime"], dm: ["ml"], m: ["emp"] },
+
+  /* ---------- 2020 ---------- */
+  { y: 2020, type: "journal", a: "Jia, S., Wu, L., Meng, Q.",
+    t: "Joint scheduling of vessel traffic and pilots in seaport waters",
+    v: "ts", d: "54", app: ["maritime"], dm: ["or"], m: [],
+    l: [["Paper", "https://doi.org/10.1287/trsc.2020.0990"]] },
+  { y: 2020, type: "journal", a: "Wu, L., Jia, S., Wang, S.",
+    t: "Pilotage planning in seaports",
+    v: "ejor", d: "287, 90–105", app: ["maritime"], dm: ["or"], m: [],
+    l: [["Paper", "https://doi.org/10.1016/j.ejor.2020.05.009"]] },
+  { y: 2020, type: "journal", a: "Wu, L., Wang, S.",
+    t: "The shore power deployment problem for maritime transportation",
+    v: "tre", d: "135, 101883", app: ["maritime", "green"], dm: ["or"], m: [],
+    l: [["Paper", "https://doi.org/10.1016/j.tre.2020.101883"]] },
+  { y: 2020, type: "journal", a: "Wu, L., Yang, D., Wang, S., Yuan, Y.",
+    t: "Evacuating offshore working barges from a land reclamation site in storm emergencies",
+    v: "tre", d: "137, 101902", app: ["maritime", "emergency"], dm: ["or"], m: [] },
+
+  /* ---------- 2019 ---------- */
+  { y: 2019, type: "journal", a: "Yang, D., Wu, L., Wang, S., Jia, H., Li, K.X.",
+    t: "How big data enriches maritime research – a critical review of Automatic Identification System (AIS) data applications",
+    v: "trev", d: "39(6), 755–773", app: ["maritime"], dm: ["ml"], m: ["review"] },
+  { y: 2019, type: "journal", a: "Wang, S., Yan, R., Wu, L., Yang, D.",
+    t: "Optimal re-allocation of mooring areas for yachts",
+    v: "mbr", d: "4(1), 94–105", app: ["maritime"], dm: ["or"], m: [] },
+  { y: 2019, type: "conference", a: "Wu, L., Zhang, W., Wang, S.",
+    t: "Teaching operations research methods in liner shipping",
+    v: "hksts", vt: "24th International Conference of Hong Kong Society for Transportation Studies, Hong Kong",
+    app: ["maritime"], dm: ["or"], m: [] },
+
+  /* ---------- 2018 ---------- */
+  { y: 2018, type: "journal", a: "Wu, L., Pan, K., Wang, S., Yang, D.",
+    t: "Bulk ship scheduling in industrial shipping with stochastic backhaul canvassing demand",
+    v: "trb", d: "117, 117–136", app: ["maritime"], dm: ["or"], m: ["stoch"],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2018.08.016"]] },
+  { y: 2018, type: "journal", a: "Wu, L., Wang, S.",
+    t: "Exact and heuristic methods to solve the parallel machine scheduling problem with multi-processor tasks",
+    v: "ijpe", d: "201, 26–40", app: ["scm"], dm: ["or"], m: ["exact", "heur"] },
+  { y: 2018, type: "journal", a: "Wu, L., Wang, S.",
+    t: "Joint deployment of quay cranes and yard cranes in container terminals at a tactical level",
+    v: "trr", d: "2672(9), 35–46", app: ["maritime"], dm: ["or"], m: [] },
+  { y: 2018, type: "conference", a: "Wu, L.*",
+    t: "Port Pricing in Competition: The Impact of Dry Ports",
+    vt: "6th International Symposium on Reliability Engineering and Risk Management, Singapore",
+    app: ["maritime"], dm: [], m: ["emp"] },
+
+  /* ---------- 2017 ---------- */
+  { y: 2017, type: "journal", a: "Wu, L., Ma, W.",
+    t: "Quay crane scheduling with draft and trim constraints",
+    v: "tre", d: "97, 38–68", app: ["maritime"], dm: ["or"], m: [],
+    l: [["Paper", "https://www.sciencedirect.com/science/article/pii/S1366554516303179"]] },
+
+  /* ---------- 2015 ---------- */
+  { y: 2015, type: "conference", a: "Ma, W., Wu, L.*",
+    t: "Fuzzy Chance-Constrained Programming for Optimal Containership Slot Exchange and Allocation in Liner Alliances",
+    vt: "Dalian, China",
+    app: ["maritime"], dm: ["or"], m: [] },
+
+  /* ---------- Working papers ---------- */
+  { type: "wp", a: "Feng, T.&, Sun, Q., Wang, S., Wu, L.*",
+    t: "A nested branch-and-cut approach for robust overnight freight service planning on urban rail transit networks",
+    st: "Under revision at INFORMS Journal on Computing", app: ["land"], dm: ["or"], m: ["robust", "exact"] },
+  { type: "wp", a: "Chen, L., Feng, T., Sun, Q., Wu, L.",
+    t: "Adaptive emergency operations: A three-stage robust optimization model",
+    st: "Under revision at Manufacturing & Service Operations Management", app: ["emergency"], dm: ["or"], m: ["robust"] },
+  { type: "wp", a: "Chen, T.#, Zhang, L., Wu, L.*, Wang, S., Mendoza, J. E.",
+    t: "Electric tugboat scheduling in seaports",
+    st: "Under revision at Transportation Science", app: ["maritime", "green"], dm: ["or"], m: [] },
+  { type: "wp", a: "Kong, H.#, He, P.&, Wu, L.*, Tang, K.#",
+    t: "Equitable hangar slot scheduling for aircraft maintenance",
+    st: "Under revision at Transportation Research Part B", app: ["aviation"], dm: ["or"], m: [] },
+  { type: "wp", a: "Li, M.#, Wu, L., Lusby, R. M., Feng, T.&",
+    t: "The checkpoint dial-a-ride problem with speed optimization for plug-in hybrid electric vehicles",
+    st: "Under revision at Transportation Research Part B", app: ["land", "green"], dm: ["or"], m: [] },
+  { type: "wp", a: "Li, X.&, Lang, H., Wu, L.*, Jiang, C.",
+    t: "Berth allocation and microgrid scheduling in seaports under uncertainty: A two-stage stochastic programming approach",
+    st: "Under revision at European Journal of Operational Research", app: ["maritime", "green"], dm: ["or"], m: ["stoch"] }
+];
+
+/* =====================================================================
+   APP — no need to edit below this line
+   ===================================================================== */
+(function () {
+  const ME = /Wu,\s*L\.(<sup>[^<]*<\/sup>)?/g;
+  // Author line: markers (# student, & postdoc, * corresponding) become superscripts; own name in bold
+  const authorsHTML = a => esc(a).replace(/((?:#|&amp;|\*)+)/g, "<sup>$1</sup>").replace(ME, m => "<strong>" + m + "</strong>");
+  const GROUP_ORDER = ["app", "dom", "method", "type", "venue"];
+  const NAMED_GROUPS = {
+    wp: "Selected working papers",
+    case: "Teaching cases",
+    patent: "Patents",
+    other: "Thesis and technical reports"
+  };
+
+  const norm = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const esc = s => String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  // Prepare derived fields
+  PUBS.forEach((p, i) => {
+    p._i = i;
+    p.app = p.app || [];
+    p.dm = p.dm || [];
+    p.m = p.m || [];
+    p.l = p.l || [];
+    const V = p.v ? VENUES[p.v] : null;
+    const published = p.type === "journal" || p.type === "conference";
+    p._hl = (published && V) ? Object.keys(HIGHLIGHTS).filter(k => V[k]) : [];
+    p._s = norm([
+      p.t, p.a, p.vt, V && V.f, V && V.s, p.d, p.st, p.y,
+      p.app.map(k => APPS[k] && APPS[k][0]).join(" "),
+      p.dm.map(k => DOMAINS[k] && DOMAINS[k][0]).join(" "),
+      p.m.map(k => METHODS[k]).join(" "),
+      p._hl.map(k => HIGHLIGHTS[k][0]).join(" "),
+      p.ind ? "industrial collaboration industry" : "",
+      (p.aw || []).map(x => x[0]).join(" ")
+    ].join(" "));
+  });
+
+  const GET = {
+    app: p => p.app,
+    dom: p => p.dm,
+    method: p => p.m,
+    // a paper matches its own venue and any venue group (@utd, @ft, @top) it belongs to
+    venue: p => (p.v ? [p.v] : []).concat(p._hl.map(k => "@" + k)),
+    type: p => p.ind ? [p.type, "industry"] : [p.type],
+  };
+  const LABEL = {
+    app: k => APPS[k][0],
+    dom: k => DOMAINS[k][0],
+    method: k => METHODS[k],
+    venue: k => k.charAt(0) === "@" ? HIGHLIGHTS[k.slice(1)][0] : VENUES[k].s,
+    type: k => TYPES[k],
+  };
+
+  const sel = { app: new Set(), dom: new Set(), method: new Set(), venue: new Set(), type: new Set() };
+  let query = "";
+  let venueExpanded = false;
+
+  function matches(p, skip) {
+    for (const g of GROUP_ORDER) {
+      if (g === skip || !sel[g].size) continue;
+      if (!GET[g](p).some(v => sel[g].has(v))) return false;
+    }
+    if (query) {
+      const toks = query.split(/\s+/).filter(Boolean);
+      for (const t of toks) if (!p._s.includes(t)) return false;
+    }
+    return true;
+  }
+  function facetCount(g, v) {
+    let n = 0;
+    for (const p of PUBS) if (GET[g](p).includes(v) && matches(p, g)) n++;
+    return n;
+  }
+  function total(g, v) {
+    let n = 0;
+    for (const p of PUBS) if (GET[g](p).includes(v)) n++;
+    return n;
+  }
+
+  // ---------- Build static controls ----------
+  const $ = id => document.getElementById(id);
+
+  const nPeer = PUBS.filter(p => p.type === "journal" || p.type === "conference").length;
+  const nWp = PUBS.filter(p => p.type === "wp").length;
+  const nPat = PUBS.filter(p => p.type === "patent").length;
+  const nCase = PUBS.filter(p => p.type === "case").length;
+  /* Statistics line, turned off. To show it again, remove the slash-star and star-slash markers around it.
+  $("lede").textContent =
+    "Brief statistics: " + PUBS.length + " works on supply chain analytics, optimization under uncertainty and ML/AI: " +
+    nPeer + " peer-reviewed papers, " + nWp + " under review, " + nPat + " patents and " + nCase +
+    " teaching cases.";
+  */
+  $("lede").textContent = "Research on operations research and data analytics for aviation, low-altitude and maritime transportation.";
+  $("updated").textContent = "List updated " + UPDATED + ".";
+
+  // Application and domain tiles (shown in the order defined in APPS / DOMAINS)
+  function makeTiles(containerId, g, dict) {
+    const c = $(containerId);
+    Object.keys(dict).forEach(k => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "problem";
+      b.dataset.g = g;
+      b.dataset.v = k;
+      b.title = dict[k][1];
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="p-name">' + esc(dict[k][0]) + '</span><span class="p-count"></span>';
+      c.appendChild(b);
+    });
+  }
+  makeTiles("problem-grid", "app", APPS);
+  makeTiles("domain-grid", "dom", DOMAINS);
+
+  function makeChips(containerId, g, keys, cls) {
+    const c = $(containerId);
+    keys.forEach(k => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip " + cls;
+      b.dataset.g = g;
+      b.dataset.v = k;
+      if (g === "venue") b.title = k.charAt(0) === "@" ? HIGHLIGHTS[k.slice(1)][1] : VENUES[k].f;
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="lab">' + esc(LABEL[g](k)) + '</span><span class="n"></span>';
+      c.appendChild(b);
+    });
+  }
+  makeChips("chips-method", "method", Object.keys(METHODS).filter(k => total("method", k) > 0), "chip-method");
+  const venueKeys = Object.keys(VENUES)
+    .filter(k => VENUES[k].filter !== false && total("venue", k) > 0);
+  makeChips("chips-venue", "venue", venueKeys, "chip-venue");
+  makeChips("chips-type", "type", Object.keys(TYPES).filter(k => total("type", k) > 0), "chip-type");
+  makeChips("chips-vset", "venue", Object.keys(HIGHLIGHTS).map(k => "@" + k), "chip-hl");
+
+  // ---------- Rendering ----------
+  const STAR = '<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
+
+  function pubHTML(p) {
+    let h = '<article class="pub">';
+    h += '<h3 class="pub-title">' + esc(p.t) + '</h3>';
+    h += '<p class="pub-authors">' + authorsHTML(p.a) + '</p>';
+
+    const parts = [];
+    if (p.v && VENUES[p.v]) {
+      const V = VENUES[p.v];
+      parts.push('<button type="button" class="venue-link" data-g="venue" data-v="' + p.v +
+        '" title="Show everything in ' + esc(V.f) + '">' + esc(p.vt || V.f) + '</button>');
+    } else if (p.vt) {
+      parts.push('<span class="venue-text">' + esc(p.vt) + '</span>');
+    }
+    if (p.d) parts.push(esc(p.d));
+    let line = parts.join(", ");
+    if ((p.type === "case" || p.type === "other") && p.y) line += (line ? " " : "") + "(" + p.y + ")";
+    if (p.st) {
+      if (p.type === "wp") line += (line ? ". " : "") + '<span class="status-text">' + esc(p.st) + '</span>';
+      else line += '<span class="status">' + esc(p.st) + '</span>';
+    }
+    p._hl.forEach(k => {
+      const on = sel.venue.has("@" + k);
+      line += '<button type="button" class="hlb' + (on ? " on" : "") + '" data-g="venue" data-v="@' + k + '" aria-pressed="' + on +
+        '" title="' + esc(HIGHLIGHTS[k][1]) + '">' + esc(k === "ai" ? "ML/AI" : HIGHLIGHTS[k][0]) + '</button>';
+    });
+    if (p.ind) {
+      const on = sel.type.has("industry");
+      line += '<button type="button" class="hlb hlb-ind' + (on ? " on" : "") + '" data-g="type" data-v="industry" aria-pressed="' + on +
+        '" title="Industrial collaboration">Industry</button>';
+    }
+    if (line) h += '<p class="pub-venue">' + line + '</p>';
+
+    (p.aw || []).forEach(([txt, url]) => {
+      h += '<p class="award">' + STAR + '<span>' +
+        (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(txt) + '</a>' : esc(txt)) +
+        '</span></p>';
+    });
+
+    const tags = p.dm.map(k =>
+      '<button type="button" class="tag tag-dom' + (sel.dom.has(k) ? " on" : "") + '" data-g="dom" data-v="' + k +
+      '" aria-pressed="' + sel.dom.has(k) + '">' + esc(DOMAINS[k][0]) + '</button>'
+    ).concat(p.app.map(k =>
+      '<button type="button" class="tag tag-app' + (sel.app.has(k) ? " on" : "") + '" data-g="app" data-v="' + k +
+      '" aria-pressed="' + sel.app.has(k) + '">' + esc(APPS[k][0]) + '</button>'
+    )).concat(p.m.map(k =>
+      '<button type="button" class="tag tag-method' + (sel.method.has(k) ? " on" : "") + '" data-g="method" data-v="' + k +
+      '" aria-pressed="' + sel.method.has(k) + '">' + esc(METHODS[k]) + '</button>'
+    ));
+    const links = p.l.map(([lab, url]) =>
+      '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(lab) + '</a>');
+    if (tags.length || links.length) {
+      h += '<div class="pub-foot">';
+      if (tags.length) h += '<div class="tags">' + tags.join("") + '</div>';
+      if (links.length) h += '<div class="links">' + links.join("") + '</div>';
+      h += '</div>';
+    }
+    return h + '</article>';
+  }
+
+  function groupKey(p) {
+    return (p.type === "journal" || p.type === "conference") ? String(p.y) : p.type;
+  }
+
+  function renderList(items) {
+    const list = $("list");
+    if (!items.length) {
+      list.innerHTML = '<div class="empty-state"><p>No publications match these filters. Remove a filter or clear them all to see the full list.</p>' +
+        '<button type="button" class="btn" data-action="clear">Clear filters</button></div>';
+      return;
+    }
+    const groups = new Map();
+    items.forEach(p => {
+      const k = groupKey(p);
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(p);
+    });
+    const yearKeys = [...groups.keys()].filter(k => /^\d{4}$/.test(k)).sort((a, b) => b - a);
+    const namedKeys = Object.keys(NAMED_GROUPS).filter(k => groups.has(k));
+    let h = "";
+    yearKeys.forEach(k => {
+      h += '<section class="ygroup" aria-label="' + k + '"><h2 class="ylabel">' + k + '</h2><div>' +
+        groups.get(k).map(pubHTML).join("") + '</div></section>';
+    });
+    namedKeys.forEach(k => {
+      h += '<section class="ygroup named" aria-label="' + esc(NAMED_GROUPS[k]) + '"><h2 class="ylabel">' + esc(NAMED_GROUPS[k]) + '</h2><div>' +
+        groups.get(k).map(pubHTML).join("") + '</div></section>';
+    });
+    list.innerHTML = h;
+  }
+
+  function updateControls() {
+    document.querySelectorAll(".problem, .chip").forEach(b => {
+      const g = b.dataset.g, v = b.dataset.v;
+      const on = sel[g].has(v);
+      const n = facetCount(g, v);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.disabled = !on && n === 0;
+      if (b.classList.contains("problem")) {
+        b.querySelector(".p-count").textContent = n + (n === 1 ? " work" : " works");
+      } else {
+        b.querySelector(".n").textContent = n;
+      }
+    });
+    // Venue collapse
+    const vb = [...document.querySelectorAll("#chips-venue .chip")];
+    vb.forEach((b, i) => {
+      const show = venueExpanded || i < VENUES_SHOWN || sel.venue.has(b.dataset.v);
+      b.hidden = !show;
+    });
+    const hiddenN = venueKeys.length - VENUES_SHOWN;
+    const vt = $("venue-toggle");
+    vt.hidden = hiddenN <= 0;
+    vt.textContent = venueExpanded ? "Show fewer venues" : "Show all " + venueKeys.length + " venues";
+
+    // Active pills
+    const act = $("active");
+    let h = "";
+    GROUP_ORDER.forEach(g => sel[g].forEach(v => {
+      const pc = (g === "venue" && v.charAt(0) === "@") ? "hl" : g;
+      h += '<button type="button" class="pill pill-' + pc + '" data-g="' + g + '" data-v="' + v +
+        '" aria-label="Remove filter ' + esc(LABEL[g](v)) + '">' + esc(LABEL[g](v)) + '<span class="x" aria-hidden="true">×</span></button>';
+    }));
+    if (query) h += '<button type="button" class="pill pill-q" data-action="clear-q" aria-label="Clear search">“' + esc($("q").value.trim()) + '”<span class="x" aria-hidden="true">×</span></button>';
+    act.innerHTML = h;
+
+    const any = GROUP_ORDER.some(g => sel[g].size) || !!query;
+    $("clear").hidden = !any;
+    const railN = ["method", "venue", "type"].reduce((s, g) => s + sel[g].size, 0);
+    $("more-count").textContent = railN ? "(" + railN + " selected)" : "";
+  }
+
+  function writeHash() {
+    const parts = [];
+    GROUP_ORDER.forEach(g => { if (sel[g].size) parts.push(g + "=" + [...sel[g]].join(",")); });
+    if (query) parts.push("q=" + encodeURIComponent($("q").value.trim()));
+    const h = parts.join("&");
+    try {
+      if (h) history.replaceState(null, "", "#" + h);
+      else history.replaceState(null, "", location.pathname + location.search);
+    } catch (e) { /* sandboxed iframe: ignore */ }
+  }
+
+  function readHash() {
+    GROUP_ORDER.forEach(g => sel[g].clear());
+    query = "";
+    $("q").value = "";
+    const h = (location.hash || "").replace(/^#/, "");
+    if (!h) return;
+    h.split("&").forEach(kv => {
+      const i = kv.indexOf("=");
+      if (i < 0) return;
+      const k = kv.slice(0, i), v = decodeURIComponent(kv.slice(i + 1));
+      if (k === "q") { $("q").value = v; query = norm(v).trim(); }
+      else if (k === "hl") v.split(",").forEach(x => { if (HIGHLIGHTS[x]) sel.venue.add("@" + x); }); // older links
+      else if (sel[k]) v.split(",").forEach(x => { if (x && LABEL[k] && safeLabel(k, x)) sel[k].add(x); });
+    });
+  }
+  function safeLabel(g, v) {
+    try { return !!LABEL[g](v); } catch (e) { return false; }
+  }
+
+  function render(opts) {
+    const items = PUBS.filter(p => matches(p, null));
+    $("count").innerHTML = "Showing <strong>" + items.length + "</strong> of " + PUBS.length + " works";
+    updateControls();
+    renderList(items);
+    if (!opts || !opts.skipHash) writeHash();
+  }
+
+  function toggle(g, v) {
+    if (sel[g].has(v)) sel[g].delete(v); else sel[g].add(v);
+    render();
+  }
+  function clearAll() {
+    GROUP_ORDER.forEach(g => sel[g].clear());
+    query = "";
+    $("q").value = "";
+    $("copy-slot").innerHTML = "";
+    render();
+  }
+  function scrollToResults() {
+    const tb = $("toolbar");
+    const r = tb.getBoundingClientRect();
+    if (r.top < 0) {
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      tb.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  // ---------- Events ----------
+  document.addEventListener("click", e => {
+    const t = e.target.closest("button");
+    if (!t) return;
+    if (t.dataset.action === "clear") { clearAll(); return; }
+    if (t.dataset.action === "clear-q") { query = ""; $("q").value = ""; render(); return; }
+    if (t.dataset.g && t.dataset.v) {
+      const inList = !!t.closest("#list");
+      toggle(t.dataset.g, t.dataset.v);
+      if (inList) scrollToResults();
+    }
+  });
+  $("clear").addEventListener("click", clearAll);
+  $("venue-toggle").addEventListener("click", () => { venueExpanded = !venueExpanded; updateControls(); });
+
+  let qTimer;
+  $("q").addEventListener("input", () => {
+    clearTimeout(qTimer);
+    qTimer = setTimeout(() => { query = norm($("q").value).trim(); render(); }, 120);
+  });
+
+  $("copy-link").addEventListener("click", async () => {
+    writeHash();
+    const url = location.href;
+    const slot = $("copy-slot");
+    try {
+      await navigator.clipboard.writeText(url);
+      const btn = $("copy-link");
+      btn.textContent = "Link copied";
+      setTimeout(() => { btn.textContent = "Copy link to this view"; }, 1800);
+    } catch (err) {
+      slot.innerHTML = '<input class="copy-out" readonly aria-label="Link to this view" value="' + esc(url) + '">';
+      const inp = slot.querySelector("input");
+      inp.focus(); inp.select();
+    }
+  });
+  // Hide "copy link" when the page is pasted into Google Sites as embed code (URL would not be shareable)
+  if (/googleusercontent|^about:|^blob:/.test(location.href) || location.protocol === "file:") {
+    $("copy-link").hidden = true;
+  }
+
+  window.addEventListener("hashchange", () => { readHash(); render({ skipHash: true }); });
+
+  // Filters panel: open on desktop, collapsible on small screens
+  const mq = window.matchMedia("(min-width: 900px)");
+  const details = $("more-filters");
+  function syncDetails() { if (mq.matches) details.open = true; }
+  syncDetails();
+  if (mq.addEventListener) mq.addEventListener("change", syncDetails);
+  else if (mq.addListener) mq.addListener(syncDetails);
+
+  readHash();
+  render({ skipHash: true });
+})();
+</script>
+<script src="site.js"></script>
 </body>
 </html>
